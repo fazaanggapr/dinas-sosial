@@ -4,8 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dashboard Admin</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Data Kontak</title>
     <style>
         * {
             margin: 0;
@@ -20,7 +19,6 @@
             margin: 0;
             display: flex;
             flex-direction: column;
-            background-color: white;
         }
 
         /* Header Styles */
@@ -77,6 +75,12 @@
             font-size: 1.5rem;
             font-weight: 700;
             margin-bottom: 0.2rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 0;
+            align-items: center;
         }
 
         /* Mobile Hamburger Menu */
@@ -173,6 +177,7 @@
             transition: transform 0.3s ease;
         }
 
+        /* Show dropdown on click - using :focus-within */
         .profile-dropdown:focus-within .dropdown-menu,
         .profile-dropdown.show .dropdown-menu {
             opacity: 1;
@@ -246,12 +251,12 @@
             color: #c53030;
         }
 
-        /* Main Container - sama persis seperti asli */
+
+
         .container {
             padding: 20px;
         }
 
-        /* H2 styling - sama persis seperti asli */
         h2 {
             margin-top: 30px;
             color: #333;
@@ -259,218 +264,54 @@
             padding-bottom: 5px;
         }
 
-        /* Welcome section - mempertahankan style asli */
-        .welcome-text {
-            color: #333;
-            margin-bottom: 30px;
-        }
-
-        /* Stats Cards */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .stat-card {
-            background: white;
-            border-radius: 12px;
-            padding: 24px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            border-left: 4px solid #7d8471;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .stat-card-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 15px;
-        }
-
-        .stat-card-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-        }
-
-        .stat-card-icon.blue {
-            background: #e3f2fd;
-            color: #1976d2;
-        }
-
-        .stat-card-icon.green {
-            background: #e8f5e8;
-            color: #388e3c;
-        }
-
-        .stat-card-icon.orange {
-            background: #fff3e0;
-            color: #f57c00;
-        }
-
-        .stat-card-icon.red {
-            background: #ffebee;
-            color: #d32f2f;
-        }
-
-        .stat-card h3 {
-            font-size: 2rem;
-            font-weight: 700;
-            color: #333;
-            margin-bottom: 5px;
-        }
-
-        .stat-card p {
-            color: #666;
-            font-size: 0.95rem;
-            margin-bottom: 10px;
-        }
-
-        .stat-card-trend {
-            font-size: 0.85rem;
-            padding: 4px 8px;
-            border-radius: 20px;
-            font-weight: 500;
-        }
-
-        .trend-up {
-            background: #e8f5e8;
-            color: #388e3c;
-        }
-
-        .trend-down {
-            background: #ffebee;
-            color: #d32f2f;
-        }
-
-        /* Chart and Table Container */
-        .content-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            margin-bottom: 30px;
-        }
-
-        .chart-container, .table-container {
-            background: white;
-            border-radius: 12px;
-            padding: 24px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-        }
-
-        .section-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #f0f0f0;
-        }
-
-        .chart-wrapper {
-            position: relative;
-            height: 300px;
-        }
-
-        /* Table Styles */
-        .data-table {
+        table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 10px;
-        }
-
-        .data-table th,
-        .data-table td {
-            padding: 12px 8px;
-            text-align: left;
-            border-bottom: 1px solid #f0f0f0;
-        }
-
-        .data-table th {
-            background: #f8f9fa;
-            font-weight: 600;
-            color: #333;
-            font-size: 0.9rem;
-        }
-
-        .data-table td {
-            font-size: 0.9rem;
-            color: #666;
-        }
-
-        .status-badge {
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
-
-        .status-pending {
-            background: #fff3cd;
-            color: #856404;
-        }
-
-        .status-completed {
-            background: #d4edda;
-            color: #155724;
-        }
-
-        .status-processing {
-            background: #cce7ff;
-            color: #004085;
-        }
-
-        /* Quick Actions */
-        .quick-actions {
+            margin-top: 15px;
             background: white;
-            border-radius: 12px;
-            padding: 24px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            margin-bottom: 30px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
-        .actions-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .action-btn {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 16px;
-            background: #f8f9fa;
-            border: 2px solid transparent;
+        .card-table {
+            background: #fff;
+            padding: 20px;
             border-radius: 8px;
-            text-decoration: none;
-            color: #333;
-            transition: all 0.2s ease;
-            font-weight: 500;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin: 20px 0;
+            overflow-x: auto;
+            /* pindahin scroll ke card langsung */
         }
 
-        .action-btn:hover {
-            border-color: #7d8471;
-            background: #f0f8f0;
-            transform: translateY(-1px);
+        .table-container {
+            width: 100%;
+            overflow-x: unset;
+            /* reset biar gak double */
         }
 
-        .action-icon {
-            width: 24px;
-            height: 24px;
-            color: #7d8471;
+
+        table th,
+        table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #6b775e;
+            color: white;
+        }
+
+        table tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .btn-red {
+            background-color: #e3342f;
+            color: #fff;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
         }
 
         .footer {
@@ -520,37 +361,118 @@
                 text-align: left;
             }
 
-            .content-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
+            /* Profile Dropdown Styles */
+            .profile-dropdown {
+                position: relative;
+                margin-left: 1rem;
             }
 
-            .stats-grid {
-                grid-template-columns: 1fr;
+            .profile-btn {
+                background: none;
+                border: none;
+                color: white;
+                cursor: pointer;
+                padding: 0.8rem 1rem;
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                border-radius: 8px;
+                transition: all 0.3s ease;
+                font-weight: 500;
             }
 
-            .actions-grid {
-                grid-template-columns: 1fr;
+            .profile-btn:hover {
+                background-color: rgba(255, 255, 255, 0.2);
             }
 
-            .container {
-                padding: 20px 15px;
+            .profile-btn:focus {
+                outline: none;
             }
 
-            h2 {
-                font-size: 1.2rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .stat-card {
-                padding: 16px;
+            .profile-icon {
+                width: 20px;
+                height: 20px;
             }
 
-            .chart-container, .table-container, .quick-actions {
-                padding: 16px;
+            .dropdown-arrow {
+                width: 16px;
+                height: 16px;
+                transition: transform 0.3s ease;
             }
-        }
+
+            /* Show dropdown on click - using :focus-within */
+            .profile-dropdown:focus-within .dropdown-menu,
+            .profile-dropdown.show .dropdown-menu {
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
+            }
+
+            .profile-dropdown:focus-within .dropdown-arrow,
+            .profile-dropdown.show .dropdown-arrow {
+                transform: rotate(180deg);
+            }
+
+            .dropdown-menu {
+                position: absolute;
+                top: 100%;
+                right: 0;
+                background: white;
+                border-radius: 8px;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+                min-width: 180px;
+                overflow: hidden;
+                opacity: 0;
+                visibility: hidden;
+                transform: translateY(-10px);
+                transition: all 0.3s ease;
+                z-index: 1000;
+                margin-top: 0.5rem;
+            }
+
+            .dropdown-item {
+                display: flex;
+                align-items: center;
+                gap: 0.75rem;
+                padding: 0.875rem 1.25rem;
+                color: #4a5568;
+                text-decoration: none;
+                transition: all 0.2s ease;
+                background: none;
+                border: none;
+                width: 100%;
+                text-align: left;
+                font-size: 0.95rem;
+                font-weight: 500;
+                cursor: pointer;
+            }
+
+            .dropdown-item:hover {
+                background-color: #f7fafc;
+                color: #7d8471;
+            }
+
+            .dropdown-icon {
+                width: 18px;
+                height: 18px;
+                flex-shrink: 0;
+            }
+
+            .dropdown-form {
+                margin: 0;
+                padding: 0;
+            }
+
+            .logout-item {
+                border-top: 1px solid #e2e8f0;
+                color: #e53e3e;
+                font-family: inherit;
+            }
+
+            .logout-item:hover {
+                background-color: #fed7d7;
+                color: #c53030;
+            }
     </style>
 </head>
 
@@ -575,9 +497,10 @@
                 </div>
 
                 <nav class="nav-menu" id="navMenu">
-                    <a href="{{ url('/dashboard') }}" class="active">Dashboard</a>
+                    <a href="{{ url('/dashboard') }}">Dashboard</a>
                     <a href="{{ url('/pengaduanadmin') }}">Pengaduan</a>
-                    <a href="{{ url('/kontakadmin') }}">Kontak</a>
+                    <a href="{{ url('/kontakadmin') }}" class="active">Kontak</a>
+
 
                     <!-- Profile Dropdown -->
                     <div class="profile-dropdown">
@@ -593,6 +516,7 @@
                             </svg>
                         </button>
                         <div class="dropdown-menu" id="profileDropdown">
+
                             <form method="POST" action="{{ route('logout') }}" class="dropdown-form">
                                 @csrf
                                 <button type="submit" class="dropdown-item logout-item">
@@ -611,69 +535,103 @@
         </div>
     </header>
 
-    <!-- Dashboard Content dengan styling asli -->
     <div class="container">
-        <!-- Welcome Section - persis seperti asli -->
-        <h2>Selamat Datang di Dashboard Admin</h2>
-        <p class="welcome-text">
-            Pantau dan kelola pengaduan serta bantuan sosial dengan mudah melalui dashboard ini.
-        </p>
+        <h2>Data Kontak</h2>
+        <p>Gunakan menu di atas untuk mengelola data <b>kontak</b>.</p>
 
-        <!-- Stats Cards -->
-        <div class="stats-grid">
-            <div class="stat-card">
-                <div class="stat-card-header">
-                    <div class="stat-card-icon green">
-                        📋
-                    </div>
-                </div>
-                <h3>2</h3>
-                <p>Pengaduan Masuk</p>
-                <span class="stat-card-trend trend-up"> 2 jam yang lalu</span>
+        {{-- Alert untuk sukses hapus --}}
+        @if (session('success'))
+            <div class="alert alert-success"
+                style="background-color: #d4edda; color: #155724; padding: 10px; border-radius: 5px; margin-bottom: 20px;">
+                {{ session('success') }}
             </div>
+        @endif
 
-            <div class="stat-card">
-                <div class="stat-card-header">
-                    <div class="stat-card-icon red">
-                        ✉
-                    </div>
-                </div>
-                <h3>1</h3>
-                <p>Total Pesan Masuk</p>
-                <span class="stat-card-trend trend-up">1 jam yang lalu</span>
+        {{-- Alert untuk error --}}
+        @if (session('error'))
+            <div class="alert alert-danger"
+                style="background-color: #f8d7da; color: #721c24; padding: 10px; border-radius: 5px; margin-bottom: 20px;">
+                {{ session('error') }}
             </div>
-        </div>
+        @endif
 
-        
+        @if ($kontaks->count() > 0)
+            <div class="card-table">
+                <h3>Tabel Data Kontak</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Nama</th>
+                            <th>Email</th>
+                            <th>Pesan</th>
+                            <th>Tanggal</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($kontaks as $index => $kontak)
+                            <tr>
+                                <td>{{ $index + 1 }}</td>
+                                <td>{{ $kontak->nama }}</td>
+                                <td>{{ $kontak->email }}</td>
+                                <td style="max-width: 300px; word-wrap: break-word;">
+                                    {{ Str::limit($kontak->pesan, 100) }}
+                                    @if (strlen($kontak->pesan) > 100)
+                                        <br>
+                                        <small>
+                                            <button onclick="showFullMessage('{{ addslashes($kontak->pesan) }}')"
+                                                style="background: none; border: none; color: #007bff; cursor: pointer; text-decoration: underline; font-size: 12px;">
+                                                Lihat selengkapnya
+                                            </button>
+                                        </small>
+                                    @endif
+                                </td>
+                                <td>{{ $kontak->created_at->format('Y-m-d H:i') }}</td>
+                                <td>
+                                    <form action="{{ route('kontak.destroy', $kontak->id) }}" method="POST"
+                                        onsubmit="return confirm('Apakah Anda yakin ingin menghapus data kontak ini?')"
+                                        style="display:inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-red">Hapus</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        @else
+            <p>Belum ada data kontak.</p>
+        @endif
 
-        <!-- Quick Actions -->
-        <div class="quick-actions">
-            <h3 class="section-title">Aksi Cepat</h3>
-            <div class="actions-grid">
+    </div>
 
-                <a href="{{ url('/pengaduanadmin') }}" class="action-btn">
-                    <svg class="action-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                    </svg>
-                    Lihat Pengaduan
-                </a>
 
-                <a href="{{ url('/kontakadmin') }}" class="action-btn">
-                    <svg class="action-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a2 2 0 01-2-2v-6a2 2 0 012-2h2m2-4h4v4m0 0V4m0 4L9 12" />
-                    </svg>
-                    Kelola Kontak
-                </a>
+
+
+    <!-- Modal untuk menampilkan pesan lengkap -->
+    <div id="messageModal"
+        style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5);">
+        <div
+            style="background-color: white; margin: 10% auto; padding: 20px; border-radius: 5px; width: 80%; max-width: 600px; position: relative;">
+            <span onclick="closeModal()"
+                style="position: absolute; right: 15px; top: 10px; font-size: 24px; cursor: pointer; color: #999;">&times;</span>
+            <h3 style="margin-top: 0;">Pesan Lengkap</h3>
+            <div id="fullMessage"
+                style="max-height: 300px; overflow-y: auto; padding: 10px; border: 1px solid #ddd; border-radius: 3px; background-color: #f9f9f9; white-space: pre-wrap;">
             </div>
         </div>
     </div>
 
-        <!-- Footer -->
+    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <p>&copy; 2025 Dinas Sosial Jawa Barat. All rights reserved.</p>
         </div>
     </footer>
+
 
     <script>
         // Mobile Menu Toggle
@@ -703,29 +661,58 @@
             });
         });
 
-        // Profile Dropdown
+        // Function untuk menampilkan pesan lengkap
+        function showFullMessage(message) {
+            document.getElementById('fullMessage').innerText = message;
+            document.getElementById('messageModal').style.display = 'block';
+        }
+
+        // Function untuk menutup modal
+        function closeModal() {
+            document.getElementById('messageModal').style.display = 'none';
+        }
+
+        // Tutup modal jika klik di luar modal
+        window.onclick = function(event) {
+            const modal = document.getElementById('messageModal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        // Hapus alert setelah beberapa detik
+        setTimeout(function() {
+            const alerts = document.querySelectorAll('.alert');
+            alerts.forEach(function(alert) {
+                alert.style.display = 'none';
+            });
+        }, 5000);
+
+        // Script dropdown profile (dari kode asli Anda)
         document.addEventListener('DOMContentLoaded', function() {
             const dropdown = document.querySelector('.profile-dropdown');
             const button = dropdown.querySelector('.profile-btn');
             const menu = dropdown.querySelector('.dropdown-menu');
 
+            // Toggle dropdown on button click
             button.addEventListener('click', function(e) {
                 e.stopPropagation();
                 dropdown.classList.toggle('show');
             });
 
+            // Close dropdown when clicking outside
             document.addEventListener('click', function(e) {
                 if (!dropdown.contains(e.target)) {
                     dropdown.classList.remove('show');
                 }
             });
 
+            // Keep dropdown open when clicking inside menu
             menu.addEventListener('click', function(e) {
                 e.stopPropagation();
             });
         });
-
-        
     </script>
 </body>
+
 </html>

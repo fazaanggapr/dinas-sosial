@@ -13,8 +13,8 @@
         }
 
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f5f5f5;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #fff;
         }
 
         /* Header Styles - Unified Design */
@@ -79,6 +79,120 @@
             color: #7d8471;
             font-weight: 600;
         }
+
+        /* Profile Dropdown Styles */
+        .profile-dropdown {
+            position: relative;
+            margin-left: 1rem;
+        }
+
+        .profile-btn {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            padding: 0.8rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .profile-btn:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .profile-btn:focus {
+            outline: none;
+        }
+
+        .profile-icon {
+            width: 20px;
+            height: 20px;
+        }
+
+        .dropdown-arrow {
+            width: 16px;
+            height: 16px;
+            transition: transform 0.3s ease;
+        }
+
+        /* Show dropdown on click - using :focus-within */
+        .profile-dropdown:focus-within .dropdown-menu,
+        .profile-dropdown.show .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .profile-dropdown:focus-within .dropdown-arrow,
+        .profile-dropdown.show .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            min-width: 180px;
+            overflow: hidden;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            margin-top: 0.5rem;
+        }
+
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.875rem 1.25rem;
+            color: #4a5568;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            background: none;
+            border: none;
+            width: 100%;
+            text-align: left;
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .dropdown-item:hover {
+            background-color: #f7fafc;
+            color: #7d8471;
+        }
+
+        .dropdown-icon {
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+        }
+
+        .dropdown-form {
+            margin: 0;
+            padding: 0;
+        }
+
+        .logout-item {
+            border-top: 1px solid #e2e8f0;
+            color: #e53e3e;
+            font-family: inherit;
+        }
+
+        .logout-item:hover {
+            background-color: #fed7d7;
+            color: #c53030;
+        }
+
 
         /* Main Content */
         .main-container {
@@ -308,6 +422,7 @@
                 font-size: 0.9rem;
             }
 
+
             .documentation-grid {
                 grid-template-columns: 1fr;
                 gap: 20px;
@@ -355,96 +470,126 @@
                     <a href="{{ url('/home') }}" onclick="showPage('home')">Home</a>
                     <a href="{{ url('/profil') }}" onclick="showPage('profil')">Profil</a>
                     <a href="{{ url('/layanan') }}" onclick="showPage('layanan')">Layanan</a>
-                    <a href="{{ url('/dokumentasi') }}" onclick="showPage('dokumentasi')" id="dokumentasi-link"
+                    <a href="{{ url('/dokumentasi') }}" onclick="showPage('dokumentasi')"
                         class="active">Dokumentasi</a>
                     <a href="{{ url('/pengaduan') }}" onclick="showPage('pengaduan')">Pengaduan</a>
                     <a href="{{ url('/kontak') }}" onclick="showPage('kontak')">Kontak</a>
+                    <!-- Profile Dropdown -->
+                    <div class="profile-dropdown">
+                        <button class="profile-btn" id="profileButton">
+                            <svg class="profile-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                fill="currentColor">
+                                <path
+                                    d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                            </svg>
+                            <svg class="dropdown-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                fill="currentColor">
+                                <path d="M7 10l5 5 5-5z" />
+                            </svg>
+                        </button>
+                        <div class="dropdown-menu" id="profileDropdown">
+
+                            <form method="POST" action="{{ route('logout') }}" class="dropdown-form">
+                                @csrf
+                                <button type="submit" class="dropdown-item logout-item">
+                                    <svg class="dropdown-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                        fill="currentColor">
+                                        <path
+                                            d="M10.09 15.59L11.5 17l5-5-5-5-1.41 1.41L12.67 11H3v2h9.67l-2.58 2.59zM19 3H5c-1.11 0-2 .9-2 2v4h2V5h14v14H5v-4H3v4c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z" />
+                                    </svg>
+                                    Logout
+                                </button>
+                            </form>
+                        </div>
+                    </div>
                 </nav>
             </div>
         </div>
     </header>
 
-<!-- Dokumentasi Page -->
-<div id="dokumentasi-page" class="page-content active">
-    <div class="main-container">
-        <h1 class="page-title">Dokumentasi Kegiatan</h1>
-        <div class="documentation-grid">
+    <!-- Dokumentasi Page -->
+    <div id="dokumentasi-page" class="page-content active">
+        <div class="main-container">
+            <h1 class="page-title">Dokumentasi Kegiatan</h1>
+            <div class="documentation-grid">
 
-            <div class="doc-item">
-                <div class="doc-image">
-                    <img src="{{ asset('/img/beritafoto-1528580.jpg') }}" 
-                         alt="Peringatan HI-UN Tahun 2023 Tingkat Provinsi Jawa Barat">
+                <div class="doc-item">
+                    <div class="doc-image">
+                        <img src="{{ asset('/img/beritafoto-1528580.jpg') }}"
+                            alt="Peringatan HI-UN Tahun 2023 Tingkat Provinsi Jawa Barat">
+                    </div>
+                    <div class="doc-content">
+                        <h3 class="doc-title">Peringatan HI-UN Tahun 2023 Tingkat Provinsi Jawa Barat</h3>
+                        <p class="doc-description">Dokumentasi kegiatan peringatan Hari International United Nations
+                            tingkat Provinsi Jawa Barat tahun 2023</p>
+                    </div>
                 </div>
-                <div class="doc-content">
-                    <h3 class="doc-title">Peringatan HI-UN Tahun 2023 Tingkat Provinsi Jawa Barat</h3>
-                    <p class="doc-description">Dokumentasi kegiatan peringatan Hari International United Nations
-                        tingkat Provinsi Jawa Barat tahun 2023</p>
+
+                <div class="doc-item">
+                    <div class="doc-image">
+                        <img src="{{ asset('/img/beritafoto-1528581.jpg') }}"
+                            alt="Dinsos Jabar Terima Penganugrahaan atas Pelayanan publik Kualitas Tinggi">
+                    </div>
+                    <div class="doc-content">
+                        <h3 class="doc-title">Dinsos Jabar Terima Penganugrahaan atas Pelayanan publik Kualitas Tinggi
+                        </h3>
+                        <p class="doc-description">Penghargaan yang diterima Dinas Sosial Jawa Barat atas komitmen dalam
+                            memberikan pelayanan publik berkualitas</p>
+                    </div>
                 </div>
+
+                <div class="doc-item">
+                    <div class="doc-image">
+                        <img src="{{ asset('/img/beritafoto-1528582.jpg') }}"
+                            alt="Penyerahan Ruang Perpustakaan PPSH/HI dan Penyuluhan Bantuan Al Quran Braille">
+                    </div>
+                    <div class="doc-content">
+                        <h3 class="doc-title">Penyerahan Ruang Perpustakaan PPSH/HI dan Penyuluhan Bantuan Al Quran
+                            Braille</h3>
+                        <p class="doc-description">Kegiatan penyerahan fasilitas perpustakaan dan bantuan Al Quran
+                            Braille untuk penyandang disabilitas</p>
+                    </div>
+                </div>
+
+                <div class="doc-item">
+                    <div class="doc-image">
+                        <img src="{{ asset('/img/beritafoto-1528583.jpg') }}"
+                            alt="Launching Bazar Ramadan 2022 YAPTD PPSH/HI">
+                    </div>
+                    <div class="doc-content">
+                        <h3 class="doc-title">Launching Bazar Ramadan 2022 YAPTD PPSH/HI</h3>
+                        <p class="doc-description">Peluncuran kegiatan bazar Ramadan tahun 2022 yang diselenggarakan
+                            oleh YAPTD PPSH/HI</p>
+                    </div>
+                </div>
+
+                <div class="doc-item">
+                    <div class="doc-image">
+                        <img src="{{ asset('/img/beritafoto-1528584.jpg') }}"
+                            alt="Penyerahan Tahar sekolah kp 244 juta bantuan untuk LKS dan anak Yatim">
+                    </div>
+                    <div class="doc-content">
+                        <h3 class="doc-title">Penyerahan Tahar sekolah kp 244 juta bantuan untuk LKS dan anak Yatim</h3>
+                        <p class="doc-description">Program bantuan pendidikan senilai 244 juta rupiah untuk Lembaga
+                            Kesejahteraan Sosial dan anak yatim</p>
+                    </div>
+                </div>
+
+                <div class="doc-item">
+                    <div class="doc-image">
+                        <img src="{{ asset('/img/beritafoto-1528585.jpg') }}"
+                            alt="Penyerahan Bantuan Alat Elektronik Kepada Penyandang Disabilitas">
+                    </div>
+                    <div class="doc-content">
+                        <h3 class="doc-title">Penyerahan Bantuan Alat Elektronik Kepada Penyandang Disabilitas</h3>
+                        <p class="doc-description">Program bantuan peralatan elektronik untuk mendukung kemandirian dan
+                            aktivitas penyandang disabilitas</p>
+                    </div>
+                </div>
+
             </div>
-
-            <div class="doc-item">
-                <div class="doc-image">
-                    <img src="{{ asset('/img/beritafoto-1528581.jpg') }}" 
-                         alt="Dinsos Jabar Terima Penganugrahaan atas Pelayanan publik Kualitas Tinggi">
-                </div>
-                <div class="doc-content">
-                    <h3 class="doc-title">Dinsos Jabar Terima Penganugrahaan atas Pelayanan publik Kualitas Tinggi</h3>
-                    <p class="doc-description">Penghargaan yang diterima Dinas Sosial Jawa Barat atas komitmen dalam
-                        memberikan pelayanan publik berkualitas</p>
-                </div>
-            </div>
-
-            <div class="doc-item">
-                <div class="doc-image">
-                    <img src="{{ asset('/img/beritafoto-1528582.jpg') }}" 
-                         alt="Penyerahan Ruang Perpustakaan PPSH/HI dan Penyuluhan Bantuan Al Quran Braille">
-                </div>
-                <div class="doc-content">
-                    <h3 class="doc-title">Penyerahan Ruang Perpustakaan PPSH/HI dan Penyuluhan Bantuan Al Quran Braille</h3>
-                    <p class="doc-description">Kegiatan penyerahan fasilitas perpustakaan dan bantuan Al Quran
-                        Braille untuk penyandang disabilitas</p>
-                </div>
-            </div>
-
-            <div class="doc-item">
-                <div class="doc-image">
-                    <img src="{{ asset('/img/beritafoto-1528583.jpg') }}" 
-                         alt="Launching Bazar Ramadan 2022 YAPTD PPSH/HI">
-                </div>
-                <div class="doc-content">
-                    <h3 class="doc-title">Launching Bazar Ramadan 2022 YAPTD PPSH/HI</h3>
-                    <p class="doc-description">Peluncuran kegiatan bazar Ramadan tahun 2022 yang diselenggarakan
-                        oleh YAPTD PPSH/HI</p>
-                </div>
-            </div>
-
-            <div class="doc-item">
-                <div class="doc-image">
-                    <img src="{{ asset('/img/beritafoto-1528584.jpg') }}" 
-                         alt="Penyerahan Tahar sekolah kp 244 juta bantuan untuk LKS dan anak Yatim">
-                </div>
-                <div class="doc-content">
-                    <h3 class="doc-title">Penyerahan Tahar sekolah kp 244 juta bantuan untuk LKS dan anak Yatim</h3>
-                    <p class="doc-description">Program bantuan pendidikan senilai 244 juta rupiah untuk Lembaga
-                        Kesejahteraan Sosial dan anak yatim</p>
-                </div>
-            </div>
-
-            <div class="doc-item">
-                <div class="doc-image">
-                    <img src="{{ asset('/img/beritafoto-1528585.jpg') }}" 
-                         alt="Penyerahan Bantuan Alat Elektronik Kepada Penyandang Disabilitas">
-                </div>
-                <div class="doc-content">
-                    <h3 class="doc-title">Penyerahan Bantuan Alat Elektronik Kepada Penyandang Disabilitas</h3>
-                    <p class="doc-description">Program bantuan peralatan elektronik untuk mendukung kemandirian dan
-                        aktivitas penyandang disabilitas</p>
-                </div>
-            </div>
-
         </div>
     </div>
-</div>
 
 
     <!-- Layanan Page -->
@@ -518,6 +663,29 @@
             if (window.innerWidth > 768) {
                 // Reset any mobile-specific styles if needed
             }
+        });
+        document.addEventListener('DOMContentLoaded', function() {
+            const dropdown = document.querySelector('.profile-dropdown');
+            const button = dropdown.querySelector('.profile-btn');
+            const menu = dropdown.querySelector('.dropdown-menu');
+
+            // Toggle dropdown on button click
+            button.addEventListener('click', function(e) {
+                e.stopPropagation();
+                dropdown.classList.toggle('show');
+            });
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!dropdown.contains(e.target)) {
+                    dropdown.classList.remove('show');
+                }
+            });
+
+            // Keep dropdown open when clicking inside menu
+            menu.addEventListener('click', function(e) {
+                e.stopPropagation();
+            });
         });
     </script>
 </body>

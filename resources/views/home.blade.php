@@ -15,6 +15,7 @@
 
         html,
         body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             height: 100%;
             margin: 0;
             display: flex;
@@ -77,10 +78,40 @@
             margin-bottom: 0.2rem;
         }
 
+        /* Mobile Hamburger Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 5px;
+            z-index: 1002;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+
         .nav-menu {
             display: flex;
             gap: 0;
             align-items: center;
+            position: relative;
         }
 
         .nav-menu a {
@@ -100,6 +131,131 @@
         .nav-menu a.active {
             background-color: #fff;
             color: #7d8471;
+        }
+
+        /* Profile Dropdown Styles */
+        .profile-dropdown {
+            position: relative;
+            margin-left: 1rem;
+        }
+
+        .profile-btn {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            padding: 0.8rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .profile-btn:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .profile-btn:focus {
+            outline: none;
+        }
+
+        .profile-icon {
+            width: 20px;
+            height: 20px;
+        }
+
+        .dropdown-arrow {
+            width: 16px;
+            height: 16px;
+            transition: transform 0.3s ease;
+        }
+
+        /* Show dropdown on click - using :focus-within */
+        .profile-dropdown:focus-within .dropdown-menu,
+        .profile-dropdown.show .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .profile-dropdown:focus-within .dropdown-arrow,
+        .profile-dropdown.show .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            min-width: 180px;
+            overflow: hidden;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            margin-top: 0.5rem;
+        }
+
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.875rem 1.25rem;
+            color: #4a5568;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            background: none;
+            border: none;
+            width: 100%;
+            text-align: left;
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .dropdown-item:hover {
+            background-color: #f7fafc;
+            color: #7d8471;
+        }
+
+        .dropdown-icon {
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+        }
+
+        .dropdown-form {
+            margin: 0;
+            padding: 0;
+        }
+
+        .logout-item {
+            border-top: 1px solid #e2e8f0;
+            color: #e53e3e;
+            font-family: inherit;
+        }
+
+        .logout-item:hover {
+            background-color: #fed7d7;
+            color: #c53030;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .profile-dropdown {
+                margin-left: 0.5rem;
+            }
+
+            .dropdown-menu {
+                right: -10px;
+                min-width: 160px;
+            }
         }
 
         .hero {
@@ -134,8 +290,6 @@
             margin: 0 auto;
         }
 
-
-
         .hero-title {
             font-size: 2.5rem;
             font-weight: 700;
@@ -152,48 +306,6 @@
         }
 
 
-        /* Social Media */
-        .social-media {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            z-index: 1000;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .social-icon {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 20px;
-            text-decoration: none;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease;
-        }
-
-        .instagram {
-            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-        }
-
-        .whatsapp {
-            background: linear-gradient(45deg, #25d366, #128c7e);
-        }
-
-        .youtube {
-            background: linear-gradient(45deg, #ff0000, #cc0000);
-        }
-
-        .social-icon:hover {
-            transform: translateY(-3px) scale(1.1);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-        }
-
         .footer {
             margin-top: auto;
             background-color: #7d8471;
@@ -206,21 +318,6 @@
 
         .footer-section a:hover {
             color: white;
-        }
-
-        .logout-link {
-            background: none;
-            border: none;
-            color: inherit;
-            font: inherit;
-            cursor: pointer;
-            padding: 0;
-            margin-left: 15px;
-            /* biar agak renggang */
-        }
-
-        .logout-link:hover {
-            text-decoration: underline;
         }
 
         /* Animations */
@@ -238,14 +335,47 @@
 
         /* Mobile Responsive */
         @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                gap: 1rem;
+            .hamburger {
+                display: flex;
             }
 
+            .header-content {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+
             .nav-menu {
-                flex-wrap: wrap;
-                justify-content: center;
+                position: fixed;
+                top: 0;
+                right: -100%;
+                height: 100vh;
+                width: 280px;
+                background-color: #7d8471;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: stretch;
+                padding-top: 80px;
+                transition: right 0.3s ease;
+                box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+                z-index: 1000;
+            }
+
+            .nav-menu.active {
+                right: 0;
+            }
+
+            .nav-menu a {
+                padding: 1rem 2rem;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                width: 100%;
+                text-align: left;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
             }
 
             .hero-title {
@@ -285,51 +415,64 @@
                         <h1>DINAS SOSIAL</h1>
                     </div>
                 </div>
-                <nav class="nav-menu">
-                    <a href="{{ url('/home') }}" id="home-link" class="active">Home</a>
+
+                <!-- Mobile Hamburger -->
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+
+                <nav class="nav-menu" id="navMenu">
+                    <a href="{{ url('/home') }}" class="active">Home</a>
                     <a href="{{ url('/profil') }}">Profil</a>
                     <a href="{{ url('/layanan') }}">Layanan</a>
-                    <a href="{{ url('/dokumentasi') }}">Dokumentasi</a>
+
                     <a href="{{ url('/pengaduan') }}">Pengaduan</a>
                     <a href="{{ url('/kontak') }}">Kontak</a>
 
-                    <!-- Logout -->
-                    <form method="POST" action="{{ route('logout') }}" style="display:inline;">
-                        @csrf
-                        <button type="submit" class="logout-link">
-                            Logout
+                    <!-- Profile Dropdown -->
+                    <div class="profile-dropdown">
+                        <button class="profile-btn" id="profileButton">
+                            <svg class="profile-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                fill="currentColor">
+                                <path
+                                    d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                            </svg>
+                            <svg class="dropdown-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                fill="currentColor">
+                                <path d="M7 10l5 5 5-5z" />
+                            </svg>
                         </button>
-                    </form>
+                        <div class="dropdown-menu" id="profileDropdown">
+
+                            <form method="POST" action="{{ route('logout') }}" class="dropdown-form">
+                                @csrf
+                                <button type="submit" class="dropdown-item logout-item">
+                                    <svg class="dropdown-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                        fill="currentColor">
+                                        <path
+                                            d="M10.09 15.59L11.5 17l5-5-5-5-1.41 1.41L12.67 11H3v2h9.67l-2.58 2.59zM19 3H5c-1.11 0-2 .9-2 2v4h2V5h14v14H5v-4H3v4c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z" />
+                                    </svg>
+                                    Logout
+                                </button>
+                            </form>
+                        </div>
+                    </div>
                 </nav>
             </div>
         </div>
     </header>
 
-
     <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="container">
             <div class="hero-content">
-                <h1 class="hero-title">SELAMAT DATANG DINSOS JABAR</h1>
+                <h1 class="hero-title">SELAMAT DATANG DI WEBSITE DINAS SOSIAL</h1>
                 <p class="hero-subtitle">Dinas Sosial Jawa Barat</p>
             </div>
         </div>
     </section>
-
-
-
-    <!-- Social Media Icons -->
-    <div class="social-media">
-        <a href="#" class="social-icon instagram" title="Instagram @dinsos_jabar">
-            <i class="fab fa-instagram"></i>
-        </a>
-        <a href="#" class="social-icon whatsapp" title="WhatsApp">
-            <i class="fab fa-whatsapp"></i>
-        </a>
-        <a href="#" class="social-icon youtube" title="YouTube @dinsos_jabar">
-            <i class="fab fa-youtube"></i>
-        </a>
-    </div>
 
     <!-- Footer -->
     <footer class="footer">
@@ -340,6 +483,32 @@
 
 
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.getElementById('hamburger');
+            const navMenu = document.getElementById('navMenu');
+
+            hamburger.addEventListener('click', function() {
+                hamburger.classList.toggle('active');
+                navMenu.classList.toggle('active');
+            });
+
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+                    hamburger.classList.remove('active');
+                    navMenu.classList.remove('active');
+                }
+            });
+
+            // Close mobile menu when window is resized to desktop
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768) {
+                    hamburger.classList.remove('active');
+                    navMenu.classList.remove('active');
+                }
+            });
+        });
+
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
@@ -397,6 +566,30 @@
             } else {
                 header.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
             }
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const dropdown = document.querySelector('.profile-dropdown');
+            const button = dropdown.querySelector('.profile-btn');
+            const menu = dropdown.querySelector('.dropdown-menu');
+
+            // Toggle dropdown on button click
+            button.addEventListener('click', function(e) {
+                e.stopPropagation();
+                dropdown.classList.toggle('show');
+            });
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!dropdown.contains(e.target)) {
+                    dropdown.classList.remove('show');
+                }
+            });
+
+            // Keep dropdown open when clicking inside menu
+            menu.addEventListener('click', function(e) {
+                e.stopPropagation();
+            });
         });
     </script>
 </body>
