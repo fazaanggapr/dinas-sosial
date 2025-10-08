@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Pengaduan</title>
+    <link rel="icon" type="image/png" href="https://tse3.mm.bing.net/th/id/OIP.pGnjqUW5JX2oohZ4_J62DQHaFj?rs=1&pid=ImgDetMain&o=7&rm=3">
+    <title>Data Pengaduan - Dinas Sosial</title>
     <style>
         * {
             margin: 0;
@@ -636,26 +637,6 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        /* Alerts */
-        .alert {
-            padding: 12px 20px;
-            margin: 20px 0;
-            border-radius: 4px;
-            position: relative;
-        }
-
-        .alert-success {
-            background-color: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-
-        .alert-error {
-            background-color: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-
         .footer {
             margin-top: auto;
             background-color: #7d8471;
@@ -982,6 +963,22 @@
         </p>
     </div>
 
+    {{-- Alert untuk sukses hapus --}}
+        @if (session('success'))
+            <div class="alert alert-success"
+                style="background-color: #d4edda; color: #155724; padding: 10px; border-radius: 5px; margin-bottom: 20px;">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        {{-- Alert untuk error --}}
+        @if (session('error'))
+            <div class="alert alert-danger"
+                style="background-color: #f8d7da; color: #721c24; padding: 10px; border-radius: 5px; margin-bottom: 20px;">
+                {{ session('error') }}
+            </div>
+        @endif
+
     <!-- Main Content -->
 
     <main class="main-content">
@@ -1113,8 +1110,6 @@
         </div>
     </div>
 
-    
-
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
@@ -1122,10 +1117,11 @@
         </div>
     </footer>
 
-    <!-- Form Delete Hidden -->
-    <form id="deleteForm" method="POST" style="display: none;">
-        <!-- Add CSRF token and method DELETE here when implementing -->
-    </form>
+<!-- Form Delete Hidden -->
+<form id="deleteForm" method="POST" style="display:none;">
+    @csrf
+    @method('DELETE')
+</form>
 
     <script>
         let deleteId = null;
@@ -1269,14 +1265,14 @@
             }
         });
 
-        // Auto hide alerts after 5 seconds
+        // Hapus alert setelah beberapa detik
         setTimeout(function() {
             const alerts = document.querySelectorAll('.alert');
-            alerts.forEach(alert => {
-                alert.style.opacity = '0';
-                setTimeout(() => alert.remove(), 300);
+            alerts.forEach(function(alert) {
+                alert.style.display = 'none';
             });
         }, 5000);
+
 
         // Table responsive enhancements
         function initTableResponsive() {

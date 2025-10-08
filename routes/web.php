@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PengaduanController;
 use App\Http\Controllers\KontakController;
@@ -30,7 +31,7 @@ Route::get('/redirect', function () {
 
 // 🔹 Admin area
 Route::middleware(['auth', \App\Http\Middleware\CheckRole::class . ':admin'])->group(function () {
-    Route::get('/admin/dashboard', fn() => view('dashboard'))->name('admin.dashboard');
+    Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
     Route::get('/pengaduanadmin', [PengaduanController::class, 'index'])->name('pengaduan.index');
     Route::get('/kontakadmin', [KontakController::class, 'index'])->name('kontak.admin');
 });
@@ -42,10 +43,13 @@ Route::middleware(['auth', \App\Http\Middleware\CheckRole::class . ':user'])->gr
     Route::post('/kontak', [KontakController::class, 'store'])->name('kontak.store');
 });
 
+
+
 // Route baru untuk delete
 // Route untuk hapus kontak (opsional)
 Route::delete('/kontakadmin/{id}', [KontakController::class, 'destroy'])->name('kontak.destroy');
 Route::delete('/pengaduan/{id}', [PengaduanController::class, 'destroy'])->name('pengaduan.destroy');
+
 
 // Profile area (bawaan Breeze)
 Route::middleware('auth')->group(function () {

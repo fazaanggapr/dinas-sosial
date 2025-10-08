@@ -4,7 +4,9 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dashboard Admin</title>
+    <title>Dashboard Admin - Dinas Sosial</title>
+    <link rel="icon" type="image/png"
+        href="https://tse3.mm.bing.net/th/id/OIP.pGnjqUW5JX2oohZ4_J62DQHaFj?rs=1&pid=ImgDetMain&o=7&rm=3">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         * {
@@ -362,7 +364,8 @@
             margin-bottom: 30px;
         }
 
-        .chart-container, .table-container {
+        .chart-container,
+        .table-container {
             background: white;
             border-radius: 12px;
             padding: 24px;
@@ -547,7 +550,9 @@
                 padding: 16px;
             }
 
-            .chart-container, .table-container, .quick-actions {
+            .chart-container,
+            .table-container,
+            .quick-actions {
                 padding: 16px;
             }
         }
@@ -621,30 +626,45 @@
 
         <!-- Stats Cards -->
         <div class="stats-grid">
+            {{-- Pengaduan --}}
             <div class="stat-card">
                 <div class="stat-card-header">
                     <div class="stat-card-icon green">
                         📋
                     </div>
                 </div>
-                <h3>2</h3>
+                <h3>{{ $totalPengaduan }}</h3>
                 <p>Pengaduan Masuk</p>
-                <span class="stat-card-trend trend-up"> 2 jam yang lalu</span>
+                @if ($lastPengaduan)
+                    <span class="stat-card-trend trend-up">
+                        {{ $lastPengaduan->created_at->diffForHumans() }}
+                    </span>
+                @else
+                    <span class="stat-card-trend">Belum ada data</span>
+                @endif
             </div>
 
+            {{-- Pesan --}}
             <div class="stat-card">
                 <div class="stat-card-header">
                     <div class="stat-card-icon red">
                         ✉
                     </div>
                 </div>
-                <h3>1</h3>
+                <h3>{{ $totalPesan }}</h3>
                 <p>Total Pesan Masuk</p>
-                <span class="stat-card-trend trend-up">1 jam yang lalu</span>
+                @if ($lastPesan)
+                    <span class="stat-card-trend trend-up">
+                        {{ $lastPesan->created_at->diffForHumans() }}
+                    </span>
+                @else
+                    <span class="stat-card-trend">Belum ada data</span>
+                @endif
             </div>
         </div>
 
-        
+
+
 
         <!-- Quick Actions -->
         <div class="quick-actions">
@@ -652,15 +672,19 @@
             <div class="actions-grid">
 
                 <a href="{{ url('/pengaduanadmin') }}" class="action-btn">
-                    <svg class="action-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    <svg class="action-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                     </svg>
                     Lihat Pengaduan
                 </a>
 
                 <a href="{{ url('/kontakadmin') }}" class="action-btn">
-                    <svg class="action-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a2 2 0 01-2-2v-6a2 2 0 012-2h2m2-4h4v4m0 0V4m0 4L9 12" />
+                    <svg class="action-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a2 2 0 01-2-2v-6a2 2 0 012-2h2m2-4h4v4m0 0V4m0 4L9 12" />
                     </svg>
                     Kelola Kontak
                 </a>
@@ -668,7 +692,7 @@
         </div>
     </div>
 
-        <!-- Footer -->
+    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <p>&copy; 2025 Dinas Sosial Jawa Barat. All rights reserved.</p>
@@ -724,8 +748,7 @@
                 e.stopPropagation();
             });
         });
-
-        
     </script>
 </body>
+
 </html>

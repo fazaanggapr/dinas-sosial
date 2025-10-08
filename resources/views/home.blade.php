@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dinas Sosial Jawa Barat</title>
+    <title>Home - Dinas Sosial</title>
+    <link rel="icon" type="image/png" href="https://tse3.mm.bing.net/th/id/OIP.pGnjqUW5JX2oohZ4_J62DQHaFj?rs=1&pid=ImgDetMain&o=7&rm=3">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         * {
@@ -259,7 +260,7 @@
         }
 
         .hero {
-            background: url("/img/banjarkota.go.id-peringatan-hari-disabilitas-internasioanl-tingkat-kota-banjar-tahun-2024-660x330.jpg") no-repeat center center/cover;
+            background: url('{{ asset('img/Dinas-Sosial-Hero.png') }}') no-repeat center center/cover;
             text-align: center;
             min-height: 85vh;
             display: flex;
@@ -469,7 +470,7 @@
         <div class="container">
             <div class="hero-content">
                 <h1 class="hero-title">SELAMAT DATANG DI WEBSITE DINAS SOSIAL</h1>
-                <p class="hero-subtitle">Dinas Sosial Jawa Barat</p>
+                <p class="hero-subtitle">Dinas Sosial Kabupaten Bogor</p>
             </div>
         </div>
     </section>
@@ -477,7 +478,7 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2025 Dinas Sosial Jawa Barat. All rights reserved.</p>
+            <p>&copy; 2025 Dinas Sosial Kabupaten Bogor. All rights reserved.</p>
         </div>
     </footer>
 
